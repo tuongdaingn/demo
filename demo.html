@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Good Luck!</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to top right, #e6ffe6, #ccf5cc);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      color: #4f772d;
+      font-weight: 400;
+      animation: glow 2s infinite alternate;
+      z-index: 2;
+      position: relative;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 4px #c8e6c9;
+      }
+      to {
+        text-shadow: 0 0 8px #a5d6a7;
+      }
+    }
+
+    .clover {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: floatDown 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatDown {
+      0% {
+        transform: translateY(-10%) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: gold;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+      z-index: 3;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="message">i hope Anh Thao will take a good English test! 🍀</h1>
+
+  <script>
+    // Thả cỏ 4 lá
+    function createClover() {
+      const clover = document.createElement("div");
+      clover.classList.add("clover");
+      clover.innerText = "🍀";
+      clover.style.left = Math.random() * 100 + "vw";
+      clover.style.fontSize = 16 + Math.random() * 24 + "px";
+      clover.style.animationDuration = (6 + Math.random() * 6) + "s";
+      document.body.appendChild(clover);
+      setTimeout(() => clover.remove(), 12000);
+    }
+
+    setInterval(createClover, 500);
+
+    // Danh sách màu pháo hoa
+    const colors = ['#f94144', '#f3722c', '#f9c74f', '#90be6d', '#43aa8b', '#577590', '#9d4edd', '#ff69b4'];
+
+    // Hiệu ứng pháo hoa nhiều màu
+    function createFirework(x, y) {
+      for (let i = 0; i < 12; i++) {
+        const fw = document.createElement("div");
+        fw.classList.add("firework");
+        fw.style.left = `${x + (Math.random() * 60 - 30)}px`;
+        fw.style.top = `${y + (Math.random() * 60 - 30)}px`;
+        fw.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+      }
+    }
+
+    document.body.addEventListener("click", (e) => {
+      createFirework(e.clientX, e.clientY);
+    });
+  </script>
+</body>
+</html>
